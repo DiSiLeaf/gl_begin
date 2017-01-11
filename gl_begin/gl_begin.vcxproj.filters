@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="deps">
+      <UniqueIdentifier>{db1a39ff-3cc7-4465-9640-ce0a2c983a09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="deps\glew-2.0.0">
+      <UniqueIdentifier>{eae40bac-ab8d-487d-ae75-7bb729f18374}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="deps\glew-2.0.0\include">
+      <UniqueIdentifier>{c29fd397-97a9-437f-a9cb-be644d648fea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="deps\glew-2.0.0\include\GL">
+      <UniqueIdentifier>{2f77a29b-b90c-4e40-97c0-01e33c517da4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gl_windows">
+      <UniqueIdentifier>{1873acba-57bd-4f4b-904f-e4b33d8dc9eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="app">
+      <UniqueIdentifier>{ecbafa34-c4fc-4f11-bc7b-4dcfa92c5a84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utilities">
+      <UniqueIdentifier>{88ee6f6b-fbf5-4b8b-ad58-c74e3fd6f523}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\deps\glew-2.0.0\include\GL\eglew.h">
+      <Filter>deps\glew-2.0.0\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\deps\glew-2.0.0\include\GL\glew.h">
+      <Filter>deps\glew-2.0.0\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\deps\glew-2.0.0\include\GL\glxew.h">
+      <Filter>deps\glew-2.0.0\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\deps\glew-2.0.0\include\GL\wglew.h">
+      <Filter>deps\glew-2.0.0\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\app\window.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gl_windows\windows_gl_utilities.h">
+      <Filter>gl_windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\utilities\init_debug_console.h">
+      <Filter>utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\app\gl_render.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="..\app\data.h">
+      <Filter>app</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\app\window.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gl_windows\windows_gl_utilities.cpp">
+      <Filter>gl_windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\utilities\init_debug_console.cpp">
+      <Filter>utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\app\gl_render.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
