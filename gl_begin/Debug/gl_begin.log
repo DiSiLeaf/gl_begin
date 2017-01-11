@@ -1,16 +1,20 @@
-﻿Build started 2017/1/6 11:02:16.
-     1>Project "E:\Code\C++\gl_begin\gl_begin\gl_begin.vcxproj" on node 2 (Build target(s)).
+﻿Build started 2017/1/11 15:14:12.
+     1>Project "E:\Mine\GitHub\gl_begin\gl_begin\gl_begin.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IE:\Code\C++\gl_begin\ /ZI /nologo /W4 /WX /sdl /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\app\gl_render.cpp
+         D:\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IE:\Mine\GitHub\gl_begin\ /ZI /nologo /W4 /WX /sdl /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\app\gl_render.cpp ..\app\window.cpp ..\gl_windows\windows_gl_utilities.cpp ..\utilities\init_debug_console.cpp
+         init_debug_console.cpp
+         windows_gl_utilities.cpp
+         window.cpp
          gl_render.cpp
+         Generating Code...
        Link:
-         D:\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Code\C++\gl_begin\Debug\gl_begin.exe" /INCREMENTAL /NOLOGO "E:\Code\C++\gl_begin\deps\glew-2.0.0\lib\Release\Win32\glew32.lib" OpenGL32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\Code\C++\gl_begin\Debug\gl_begin.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Code\C++\gl_begin\Debug\gl_begin.lib" /MACHINE:X86 Debug\gl_render.obj
+         D:\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Mine\GitHub\gl_begin\Debug\gl_begin.exe" /INCREMENTAL /NOLOGO "E:\Mine\GitHub\gl_begin\deps\glew-2.0.0\lib\Release\Win32\glew32.lib" OpenGL32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\Mine\GitHub\gl_begin\Debug\gl_begin.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Mine\GitHub\gl_begin\Debug\gl_begin.lib" /MACHINE:X86 Debug\gl_render.obj
          Debug\window.obj
          Debug\windows_gl_utilities.obj
          Debug\init_debug_console.obj
-         gl_begin.vcxproj -> E:\Code\C++\gl_begin\Debug\gl_begin.exe
-     1>Done Building Project "E:\Code\C++\gl_begin\gl_begin\gl_begin.vcxproj" (Build target(s)).
+         gl_begin.vcxproj -> E:\Mine\GitHub\gl_begin\Debug\gl_begin.exe
+     1>Done Building Project "E:\Mine\GitHub\gl_begin\gl_begin\gl_begin.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.44
+Time Elapsed 00:00:03.01
