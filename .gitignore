@@ -1,4 +1,4 @@
 Debug/
-.suo
-.sdf
-.opensdf
+*.suo
+*.sdf
+*.opensdf
