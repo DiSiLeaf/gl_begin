@@ -1,6 +1,10 @@
 #include <iostream>
+#include <vector>
 
 #include <windows.h>
+
+#include <atlbase.h>
+#include <atlwin.h>
 
 #include "app/gl_render.h"
 
@@ -8,8 +12,123 @@
 
 #include "utilities/init_debug_console.h"
 
-HWND g_main_window = nullptr;
+//HWND g_main_window = nullptr;
 WCHAR *g_main_wndclass_name = L"main class";
+
+class GlWindow;
+GlWindow *g_window = nullptr;
+
+
+class MsgIdleObserver {
+public:
+    static void AddObserver(MsgIdleObserver *ob)
+    {
+        if (ob)
+            idle_observers.push_back(ob);
+    }
+    static void RemoveObserver(MsgIdleObserver *ob)
+    {
+        if (ob) {
+            for (std::vector<MsgIdleObserver*>::const_iterator it
+                    = idle_observers.begin()
+                    ; idle_observers.end() != it; it++) 
+                if (ob == *it) {
+                    idle_observers.erase(it);
+                    return;
+                }
+        }
+    }
+
+    static void Dispatch(void)
+    {
+        for (auto it : idle_observers) {
+            if (it)
+                it->OnIdle();
+        }
+    }
+private:
+    static std::vector<MsgIdleObserver*> idle_observers;
+
+protected:
+    MsgIdleObserver() : valid_(true) {
+    }
+    void InvalidateObserver()
+    {
+        valid_ = false;
+
+        for (std::vector<MsgIdleObserver*>::const_iterator it 
+                = idle_observers.begin()
+                ; idle_observers.end() != it; it++)
+            if (this == *it) {
+                idle_observers.erase(it);
+                return;
+            }
+    }
+private:
+    bool valid_;
+
+protected:
+    virtual void OnIdle() = 0;
+};
+
+std::vector<MsgIdleObserver*> MsgIdleObserver::idle_observers;
+
+class GlWindow 
+        : public CWindowImpl< GlWindow, CWindow, 
+            CWinTraits<WS_OVERLAPPEDWINDOW, 0> >,
+        public MsgIdleObserver {
+public:
+    DECLARE_WND_CLASS_EX(L"GlWindow", 
+            CS_HREDRAW | CS_VREDRAW | CS_OWNDC, COLOR_WINDOW)
+
+    static LPCWSTR GetWndCaption()
+    {
+        return L"main window";
+    }
+    BEGIN_MSG_MAP(GlWindow)
+    MESSAGE_HANDLER(WM_SIZE, ResizeHandle)
+    MESSAGE_HANDLER(WM_DESTROY, DestoryHandle)
+    END_MSG_MAP()
+
+protected:
+    void OnIdle()
+    {
+        display();
+
+        SwapBuffers(GetDC());
+    }
+
+
+private:
+    LRESULT ResizeHandle(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL &handled)
+    {
+        uMsg;
+
+        if (SIZE_RESTORED == wParam) {
+            WORD w, h;
+            w = LOWORD(lParam);
+            h = HIWORD(lParam);
+
+            glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+        }
+
+        handled = TRUE;
+        return 0;
+    }
+
+    LRESULT DestoryHandle(UINT, WPARAM, LPARAM, BOOL &handled)
+    {
+        InvalidateObserver();
+
+        PostQuitMessage(0);
+
+        handled = TRUE;
+        return 0;
+    }
+
+};
+
+
 
 bool create_my_main_window(HINSTANCE instance);
 
@@ -33,7 +152,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     if (!create_my_main_window(hInstance))
         return 1;
 
-    init_gl_render_data(g_main_window);
+    //init_gl_render_data(g_main_window);
+
+    init_gl_render_data(*g_window);
 
     // Main message loop:
     while (GetMessage(&msg, NULL, 0, 0))
@@ -43,11 +164,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             TranslateMessage(&msg);
             DispatchMessage(&msg);
 
-            display();
+            //display();
 
-            SwapBuffers(GetDC(g_main_window));
+            MsgIdleObserver::Dispatch();
+
+            //SwapBuffers(GetDC(g_main_window));
         }
     }
+
+    clean_data();
+
+    //delete g_window;
+    //g_window = nullptr;
 
     return (int)msg.wParam;
 }
@@ -75,42 +203,47 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     return 0;
 }
 
-bool create_my_main_window(HINSTANCE instance)
+bool create_my_main_window(HINSTANCE)
 {
 
-    WNDCLASSEX wcex;
+    //WNDCLASSEX wcex;
 
-    wcex.cbSize = sizeof(WNDCLASSEX);
+    //wcex.cbSize = sizeof(WNDCLASSEX);
 
-    wcex.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-    wcex.lpfnWndProc = WndProc;
-    wcex.cbClsExtra = 0;
-    wcex.cbWndExtra = 0;
-    wcex.hInstance = instance;
-    wcex.hIcon = nullptr;
-    wcex.hCursor = nullptr;
-    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    //wcex.lpszMenuName	= MAKEINTRESOURCE(IDC_G);
-    wcex.lpszMenuName = nullptr;
-    wcex.lpszClassName = g_main_wndclass_name;
-    wcex.hIconSm = nullptr;
+    //wcex.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
+    //wcex.lpfnWndProc = WndProc;
+    //wcex.cbClsExtra = 0;
+    //wcex.cbWndExtra = 0;
+    //wcex.hInstance = instance;
+    //wcex.hIcon = nullptr;
+    //wcex.hCursor = nullptr;
+    //wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+    ////wcex.lpszMenuName	= MAKEINTRESOURCE(IDC_G);
+    //wcex.lpszMenuName = nullptr;
+    //wcex.lpszClassName = g_main_wndclass_name;
+    //wcex.hIconSm = nullptr;
 
-    RegisterClassEx(&wcex);
+    //RegisterClassEx(&wcex);
+
+    g_window = new GlWindow();
+    g_window->Create(nullptr);
+    g_window->ShowWindow(SW_SHOW);
+    MsgIdleObserver::AddObserver(g_window);
 
 
-    HWND wnd;
+    //HWND wnd;
 
-    wnd = CreateWindow(g_main_wndclass_name, L"main window", WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, 0, 400, 400, NULL, NULL, instance, NULL);
+    //wnd = CreateWindow(g_main_wndclass_name, L"main window", WS_OVERLAPPEDWINDOW,
+    //    CW_USEDEFAULT, 0, 400, 400, NULL, NULL, instance, NULL);
 
-    if (!wnd)
-    {
-        return false;
-    }
+    //if (!wnd)
+    //{
+    //    return false;
+    //}
 
-    g_main_window = wnd;
-    ShowWindow(wnd, SW_SHOW);
-    UpdateWindow(wnd);
+    //g_main_window = wnd;
+    //ShowWindow(wnd, SW_SHOW);
+    //UpdateWindow(wnd);
 
     return true;
 

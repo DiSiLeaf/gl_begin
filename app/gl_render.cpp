@@ -124,12 +124,14 @@ ERROR_5 :
     wglMakeCurrent(NULL, NULL);
 ERROR_4:
     wglDeleteContext(g_gl_render_context);
+    g_gl_render_context = nullptr;
 ERROR_3:
 ERROR_2 :
 ERROR_1 :
     std::cout << err_msg << std::endl;
     return err_code;
 }
+
 
 static int LoadShader(GLenum type, const GLchar *source, GLuint *ret_shader)
 {
@@ -275,6 +277,17 @@ bool init_gl_render_data(HWND wnd)
 
     return true;
 
+}
+
+void clean_data(void)
+{
+    if (nullptr == g_gl_render_context) {
+        return;
+    }
+
+    wglMakeCurrent(NULL, NULL);
+    wglDeleteContext(g_gl_render_context);
+    g_gl_render_context = nullptr;
 }
 
 void display()
