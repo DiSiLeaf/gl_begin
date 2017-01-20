@@ -45,7 +45,7 @@ void main()                                                                  \n\
 ";
 
 
-static int init_gl_render_context(HWND wnd)
+static int init_gl_render_context(VAR_IN HWND wnd)
 {
 #ifdef RETURN
 #error macro 'RETURN' has already existed;
@@ -133,7 +133,7 @@ ERROR_1 :
 }
 
 
-static int LoadShader(GLenum type, const GLchar *source, GLuint *ret_shader)
+static int LoadShader(VAR_IN GLenum type, VAR_IN const GLchar *source, VAR_OUT GLuint *ret_shader)
 {
     GLuint shader = glCreateShader(type);
 
@@ -160,7 +160,7 @@ static int LoadShader(GLenum type, const GLchar *source, GLuint *ret_shader)
     return 0;
 }
 
-static int SetupProgram(const GLuint *shaders, int size, GLuint *ret_prog)
+static int SetupProgram(VAR_IN const GLuint *shaders, VAR_IN int size, VAR_OUT GLuint *ret_prog)
 {
     GLuint program = glCreateProgram();
     if (0 == program) {
@@ -290,7 +290,7 @@ void clean_data(void)
     g_gl_render_context = nullptr;
 }
 
-void display()
+void display(void)
 {
     static int tf = 0;
     static int count = 0;

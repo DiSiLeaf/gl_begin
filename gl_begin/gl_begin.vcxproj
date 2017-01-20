@@ -80,6 +80,7 @@
     <ClInclude Include="..\deps\glew-2.0.0\include\GL\glxew.h" />
     <ClInclude Include="..\deps\glew-2.0.0\include\GL\wglew.h" />
     <ClInclude Include="..\gl_windows\windows_gl_utilities.h" />
+    <ClInclude Include="..\utilities\funtion_annotation_macro.h" />
     <ClInclude Include="..\utilities\init_debug_console.h" />
   </ItemGroup>
   <ItemGroup>

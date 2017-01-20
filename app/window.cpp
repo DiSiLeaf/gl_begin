@@ -12,6 +12,8 @@
 
 #include "utilities/init_debug_console.h"
 
+#include "utilities/funtion_annotation_macro.h"
+
 //HWND g_main_window = nullptr;
 WCHAR *g_main_wndclass_name = L"main class";
 
@@ -21,12 +23,12 @@ GlWindow *g_window = nullptr;
 
 class MsgIdleObserver {
 public:
-    static void AddObserver(MsgIdleObserver *ob)
+    static void AddObserver(VAR_IN MsgIdleObserver *ob)
     {
         if (ob)
             idle_observers.push_back(ob);
     }
-    static void RemoveObserver(MsgIdleObserver *ob)
+    static void RemoveObserver(VAR_IN MsgIdleObserver *ob)
     {
         if (ob) {
             for (std::vector<MsgIdleObserver*>::const_iterator it
@@ -50,9 +52,9 @@ private:
     static std::vector<MsgIdleObserver*> idle_observers;
 
 protected:
-    MsgIdleObserver() : valid_(true) {
+    MsgIdleObserver(void) : valid_(true) {
     }
-    void InvalidateObserver()
+    void InvalidateObserver(void)
     {
         valid_ = false;
 
@@ -68,7 +70,7 @@ private:
     bool valid_;
 
 protected:
-    virtual void OnIdle() = 0;
+    virtual void OnIdle(void) = 0;
 };
 
 std::vector<MsgIdleObserver*> MsgIdleObserver::idle_observers;
@@ -81,7 +83,7 @@ public:
     DECLARE_WND_CLASS_EX(L"GlWindow", 
             CS_HREDRAW | CS_VREDRAW | CS_OWNDC, COLOR_WINDOW)
 
-    static LPCWSTR GetWndCaption()
+    static LPCWSTR GetWndCaption(void)
     {
         return L"main window";
     }
@@ -91,7 +93,7 @@ public:
     END_MSG_MAP()
 
 protected:
-    void OnIdle()
+    void OnIdle(void)
     {
         display();
 
@@ -100,7 +102,7 @@ protected:
 
 
 private:
-    LRESULT ResizeHandle(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL &handled)
+    LRESULT ResizeHandle(VAR_IN UINT uMsg, VAR_IN WPARAM wParam, VAR_IN LPARAM lParam, VAR_IN BOOL &handled)
     {
         uMsg;
 
@@ -116,7 +118,7 @@ private:
         return 0;
     }
 
-    LRESULT DestoryHandle(UINT, WPARAM, LPARAM, BOOL &handled)
+    LRESULT DestoryHandle(VAR_IN UINT, VAR_IN WPARAM, LPARAM, VAR_OUT BOOL &handled)
     {
         InvalidateObserver();
 
@@ -181,7 +183,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 }
 
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WndProc(VAR_IN HWND hWnd, VAR_IN UINT message, VAR_IN WPARAM wParam, VAR_IN LPARAM lParam)
 {
     PAINTSTRUCT ps;
     HDC hdc;
@@ -203,7 +205,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     return 0;
 }
 
-bool create_my_main_window(HINSTANCE)
+bool create_my_main_window(VAR_IN HINSTANCE)
 {
 
     //WNDCLASSEX wcex;

@@ -3,9 +3,11 @@
 
 #include <windows.h>
 
-int init_windows_gl(HINSTANCE instance);
-int gl_major_ver();
-int gl_minor_ver();
+#include "utilities/funtion_annotation_macro.h"
+
+int init_windows_gl(VAR_IN HINSTANCE instance);
+int gl_major_ver(void);
+int gl_minor_ver(void);
 
 
 

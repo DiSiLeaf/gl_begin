@@ -1,7 +1,8 @@
-﻿Build started 2017/1/16 15:21:56.
+﻿Build started 2017/1/20 13:33:06.
      1>Project "E:\Mine\GitHub\gl_begin\gl_begin\gl_begin.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IE:\Mine\GitHub\gl_begin\ /ZI /nologo /W4 /WX /sdl /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\app\gl_render.cpp ..\app\window.cpp
+         D:\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IE:\Mine\GitHub\gl_begin\ /ZI /nologo /W4 /WX /sdl /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\app\gl_render.cpp ..\app\window.cpp ..\gl_windows\windows_gl_utilities.cpp
+         windows_gl_utilities.cpp
          window.cpp
          gl_render.cpp
          Generating Code...
@@ -15,4 +16,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.14
+Time Elapsed 00:00:03.09

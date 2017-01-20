@@ -51,6 +51,9 @@
     <ClInclude Include="..\app\data.h">
       <Filter>app</Filter>
     </ClInclude>
+    <ClInclude Include="..\utilities\funtion_annotation_macro.h">
+      <Filter>utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\app\window.cpp">

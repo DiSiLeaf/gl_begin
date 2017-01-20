@@ -4,18 +4,20 @@
 
 #include <windows.h>
 
+#include "utilities/funtion_annotation_macro.h"
+
 #include "deps/glew-2.0.0/include/GL/glew.h"
 
 static int g_gl_major_version = 0;
 static int g_gl_minor_version = 0;
 
 
-static LRESULT CALLBACK WndProc(HWND wnd, UINT message, WPARAM w_p, LPARAM l_p)
+static LRESULT CALLBACK WndProc(VAR_IN HWND wnd, VAR_IN UINT message, VAR_IN WPARAM w_p, VAR_IN LPARAM l_p)
 {
     return DefWindowProc(wnd, message, w_p, l_p);
 }
 
-static int create_dummy_window_class(HINSTANCE instance, ATOM *wnd_class)
+static int create_dummy_window_class(VAR_IN HINSTANCE instance, VAR_OUT ATOM *wnd_class)
 {
     WNDCLASSEX wcex;
 
@@ -43,7 +45,7 @@ static int create_dummy_window_class(HINSTANCE instance, ATOM *wnd_class)
     return 0;
 }
 
-static int create_dummy_window(HINSTANCE instance, ATOM wnd_class, HWND *wnd)
+static int create_dummy_window(VAR_IN HINSTANCE instance, VAR_IN ATOM wnd_class, VAR_OUT HWND *wnd)
 {
     HWND wd;
 
@@ -61,7 +63,7 @@ static int create_dummy_window(HINSTANCE instance, ATOM wnd_class, HWND *wnd)
 }
 
 
-static int create_dummy_gl_context(HWND wnd, HGLRC *ret_gl_context)
+static int create_dummy_gl_context(VAR_IN HWND wnd, VAR_OUT HGLRC *ret_gl_context)
 {
     HGLRC gl_context = nullptr;
     HDC dc = GetDC(wnd);
@@ -102,7 +104,7 @@ static int create_dummy_gl_context(HWND wnd, HGLRC *ret_gl_context)
     return 0;
 }
 
-static void init_gl_version(const GLubyte *gl_raw_ver)
+static void init_gl_version(VAR_IN const GLubyte *gl_raw_ver)
 {
     if (!gl_raw_ver)
         return;
@@ -149,7 +151,7 @@ static void init_gl_version(const GLubyte *gl_raw_ver)
 }
 
 
-int init_windows_gl(HINSTANCE instance)
+int init_windows_gl(VAR_IN HINSTANCE instance)
 {
 #ifdef RETURN
 #error macro 'RETURN' has existed
@@ -217,12 +219,12 @@ ERROR_1:
 #undef RETURN
 }
 
-int gl_major_ver()
+int gl_major_ver(void)
 {
     return g_gl_major_version;
 }
 
-int gl_minor_ver()
+int gl_minor_ver(void)
 {
     return g_gl_major_version;
 }
