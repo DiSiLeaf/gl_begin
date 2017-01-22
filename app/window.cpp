@@ -33,7 +33,7 @@ public:
         if (ob) {
             for (std::vector<MsgIdleObserver*>::const_iterator it
                     = idle_observers.begin()
-                    ; idle_observers.end() != it; it++) 
+                    ; idle_observers.end() != it; ++it) 
                 if (ob == *it) {
                     idle_observers.erase(it);
                     return;
@@ -60,7 +60,7 @@ protected:
 
         for (std::vector<MsgIdleObserver*>::const_iterator it 
                 = idle_observers.begin()
-                ; idle_observers.end() != it; it++)
+                ; idle_observers.end() != it; ++it)
             if (this == *it) {
                 idle_observers.erase(it);
                 return;
